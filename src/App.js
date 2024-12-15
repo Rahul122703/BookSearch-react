@@ -52,12 +52,15 @@ const App = () => {
     fetchBookData(searchQuery);
   }, []); // Only runs on mount
 
-  // Handle input change on keyup
+  // Handle input change on keydown
   const handleSearchInput = (e) => {
-    const query = e.target.value.trim();
-    if (query) {
-      setSearchQuery(query);
-      fetchBookData(query);
+    if (e.key === "Enter") {
+      // Trigger search only on Enter key press
+      const query = e.target.value.trim();
+      if (query) {
+        setSearchQuery(query);
+        fetchBookData(query);
+      }
     }
   };
 
@@ -70,7 +73,7 @@ const App = () => {
           name="text"
           type="text"
           placeholder="Search for books..."
-          onKeyUp={handleSearchInput} // Event listener for keyup
+          onKeyDown={handleSearchInput} // Event listener for keydown
         />
       </div>
 
